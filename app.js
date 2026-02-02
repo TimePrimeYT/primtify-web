@@ -32,6 +32,13 @@ const tracks = [
     cover: "images/nichen.jpg",
     url: "audio/gaucamel.mp3"
   },
+{
+    id: 3,
+    title: "Weyloxx",
+    artist: "zeub",
+    cover: "images/caca1.jpg",
+    url: "audio/zeub.mp3"
+  },
 ];
 
 // Fonction pour afficher les musiques
