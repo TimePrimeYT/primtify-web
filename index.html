@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Primtify</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Primtify</h1>
-    <input type="text" id="search" placeholder="Rechercher musique ou artiste...">
-  </header>
 
-  <main>
-    <h2>Tendances</h2>
-    <div id="tracks"></div>
-  </main>
+<header>
+  <h1>🎵 Primtify</h1>
+</header>
 
-  <!-- Barre de lecture fixe -->
-  <footer>
-    <audio id="player" controls></audio>
-  </footer>
+<main id="content"></main>
 
-  <script src="app.js"></script>
+<footer class="player-bar">
+  <div class="player-left">
+    <img id="player-cover" src="" />
+    <div>
+      <div id="player-title">Aucun son</div>
+      <div id="player-artist"></div>
+    </div>
+  </div>
+
+  <div class="player-center">
+    <button id="play-btn">▶</button>
+    <input type="range" id="progress" value="0" min="0" max="100">
+  </div>
+
+  <div class="player-right">
+    🔊
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+  </div>
+
+  <audio id="audio"></audio>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>

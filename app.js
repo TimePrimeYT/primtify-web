@@ -1,74 +1,68 @@
-const tracksContainer = document.getElementById("tracks");
-const player = document.getElementById("player");
-const searchInput = document.getElementById("search");
-
-// Liste de test — tu ajoutes tes fichiers ici
 const tracks = [
-  {
-    id: 1,
-    title: "éxclu 2026",
-    artist: "ven1",
-    cover: "images/éxclu.jpg",
-    url: "audio/éxclu.mp3"
-  },
-  {
-    id: 2,
-    title: "élivera",
-    artist: "ven1",
-    cover: "images/élivera.jpg",
-    url: "audio/élivera.mp3"
-  },
-  {
-    id: 3,
-    title: "Gateau",
-    artist: "ven1",
-    cover: "images/gateau.jpg",
-    url: "audio/gateau.mp3"
-  },
-  {
-    id: 4,
-    title: "Gaucamel",
-    artist: "ven1",
-    cover: "images/nichen.jpg",
-    url: "audio/gaucamel.mp3"
-  },
-{
-    id: 5,
-    title: "Weyloxx",
-    artist: "zeub",
-    cover: "images/arabe.jpg",
-    url: "audio/zeub.mp3"
-  },
+  { title: "BOUGIE", artist: "VEN1", cover:"images/hakeyet.jpg", url:"audio/VEN1 - BOUGIE.mp3", category:"tendance" },
+  { title: "Gâteau", artist: "VEN1", cover:"images/gateau.jpg", url:"audio/gateau.mp3", category:"ven1" },
+  { title: "Pêche", artist: "VEN1", cover:"images/nichen.jpg", url:"audio/peche.mp3", category:"ven1" },
+  { title: "Exclu", artist: "VEN1", cover:"images/éxclu.jpg", url:"audio/éxclu.mp3", category:"tendance" },
+  { title: "Elivera", artist: "VEN1", cover:"images/élivera.jpg", url:"audio/élivera.mp3", category:"tendance" },
+  { title: "Son Gims", artist: "Gims", cover:"images/hakeyet.jpg", url:"audio/gaucamel.mp3", category:"gims" },
 ];
 
-// Fonction pour afficher les musiques
-function displayTracks(list) {
-  tracksContainer.innerHTML = "";
-  list.forEach(track => {
-    const div = document.createElement("div");
-    div.className = "track";
-    div.innerHTML = `
-      <img src="${track.cover}" />
-      <h4>${track.title}</h4>
-      <p>${track.artist}</p>
-    `;
-    div.addEventListener("click", () => {
-      player.src = track.url;
-      player.play();
-    });
-    tracksContainer.appendChild(div);
-  });
+const content = document.getElementById("content");
+
+function createTrackCard(track){
+  const div = document.createElement("div");
+  div.className = "track";
+  div.innerHTML = `
+    <img src="${track.cover}">
+    <h4>${track.title}</h4>
+    <p>${track.artist}</p>
+  `;
+  div.onclick = () => loadTrack(track);
+  return div;
 }
 
-// Affichage initial
-displayTracks(tracks);
+function displayCategory(name, title) {
+  const section = document.createElement("section");
+  section.innerHTML = `<h2>${title} <span>+</span></h2><div class="tracks-row"></div>`;
+  const container = section.querySelector(".tracks-row");
+  tracks.filter(t => t.category === name).slice(0,5)
+        .forEach(track => container.appendChild(createTrackCard(track)));
+  content.appendChild(section);
+}
 
-// Recherche simple
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = tracks.filter(track =>
-    track.title.toLowerCase().includes(query) ||
-    track.artist.toLowerCase().includes(query)
-  );
-  displayTracks(filtered);
-});
+displayCategory("tendance", "🔥 Tendances");
+displayCategory("ven1", "🎤 VEN1");
+displayCategory("gims", "🎶 Gims");
+
+/* PLAYER */
+
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("play-btn");
+const progress = document.getElementById("progress");
+const volume = document.getElementById("volume");
+
+function loadTrack(track){
+  audio.src = track.url;
+  document.getElementById("player-title").textContent = track.title;
+  document.getElementById("player-artist").textContent = track.artist;
+  document.getElementById("player-cover").src = track.cover;
+  audio.play();
+  playBtn.textContent = "⏸";
+}
+
+playBtn.onclick = () => {
+  if(audio.paused){ audio.play(); playBtn.textContent="⏸"; }
+  else { audio.pause(); playBtn.textContent="▶"; }
+};
+
+audio.ontimeupdate = () => {
+  progress.value = (audio.currentTime / audio.duration) * 100 || 0;
+};
+
+progress.oninput = () => {
+  audio.currentTime = (progress.value / 100) * audio.duration;
+};
+
+volume.oninput = () => {
+  audio.volume = volume.value;
+};
