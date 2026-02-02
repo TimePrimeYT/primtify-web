@@ -1,0 +1,85 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: #1e1e1e;
+}
+
+header h1 {
+  font-size: 28px;
+  color: #1db954; /* Spotify green */
+}
+
+header input {
+  padding: 8px 12px;
+  width: 250px;
+  border-radius: 20px;
+  border: none;
+}
+
+main {
+  flex: 1;
+  padding: 20px 30px;
+}
+
+#tracks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.track {
+  width: 180px;
+  background: #1f1f1f;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.track:hover {
+  transform: scale(1.05);
+}
+
+.track img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.track h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.track p {
+  font-size: 14px;
+  color: #b3b3b3;
+}
+
+/* Barre audio */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #1e1e1e;
+  padding: 10px 30px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.5);
+}
