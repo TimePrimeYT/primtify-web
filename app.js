@@ -36,7 +36,7 @@ const tracks = [
     id: 5,
     title: "Weyloxx",
     artist: "zeub",
-    cover: "images/caca1.png",
+    cover: "images/arabe.jpg",
     url: "audio/zeub.mp3"
   },
 ];
